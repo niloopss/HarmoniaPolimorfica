@@ -26,6 +26,37 @@ Este fluxograma representa a lógica do projeto, ele reflete as opções do menu
 
 ![Fluxograma - HarmoniaPolimorfica - Mermaid.png](Fluxograma%20-%20HarmoniaPolimorfica%20-%20Mermaid.png)
 
+
+**Código Mermaid**
+```
+graph TD
+subgraph Menu
+A[Iniciar] --> B{Escolha uma opção}
+B -->|1| C[Tocar Violão]
+B -->|2| D[Tocar Tambor]
+B -->|3| E[Tocar Trompete]
+B -->|4| F[Tocar Orquestra]
+B -->|0| G[Sair]
+end
+
+    C --> H[Solicitar nota ou aleatória]
+    D --> I[Tocar Tambor]
+    E --> H
+    H --> J[Armazenar Partitura]
+    I --> J
+    J --> B
+
+    F --> K[Verificar se há partituras]
+    K --> |Sim| L[Tocar cada instrumento da partitura]
+    K --> |Não| M[Exibir mensagem 'Nenhuma partitura']
+
+    L --> B
+    M --> B
+
+    G --> Z[Fim]
+```
+
+
 **Explicação do Fluxograma:**
 
 1. **Menu (A-G):**
@@ -56,6 +87,78 @@ Diagrama gerado pelo IntelliJ
 
 ![Diagrama de Classes - HarmoniaPolimorfica - Mermaid.png](Diagrama%20de%20Classes%20-%20HarmoniaPolimorfica%20-%20Mermaid.png)
 Diagrama gerado no Mermaid
+
+**Código Mermaid**
+```
+classDiagram
+class Instrumento {
+<<interface>>
++play(String): void
++toString(): String
+}
+
+    class InstrumentoPercussao {
+        <<abstract>>
+        +play(String): void
+    }
+
+    class InstrumentoSopro {
+        <<abstract>>
+        +play(String): void
+    }
+
+    class InstrumentoCorda {
+        <<abstract>>
+        +play(String): void
+    }
+
+    class Tambor {
+        +Tambor()
+        +toString(): String
+    }
+
+    class Trompete {
+        +Trompete()
+        +toString(): String
+    }
+
+    class Violao {
+        +Violao()
+        +toString(): String
+    }
+
+    class Partitura {
+        -instrumento: Instrumento
+        -nota: String
+        +Partitura(Instrumento, String)
+    }
+
+    class Orquestra {
+        -instrumentos: List~Instrumento~
+        -partituras: List~Partitura~
+        +Orquestra()
+        +adicionarInstrumento(Instrumento): void
+        +adicionarPartitura(Instrumento, String): void
+        +tocarOrquestra(): void
+        +getInstrumentos(): List~Instrumento~
+    }
+
+    class Main {
+        +Main()
+        +main(String[]): void
+    }
+
+    Instrumento <|-- InstrumentoPercussao
+    Instrumento <|-- InstrumentoSopro
+    Instrumento <|-- InstrumentoCorda
+    InstrumentoPercussao <|-- Tambor
+    InstrumentoSopro <|-- Trompete
+    InstrumentoCorda <|-- Violao
+    Orquestra "1" o-- "*" Instrumento : instrumentos
+    Orquestra "1" o-- "*" Partitura : partituras
+    Partitura "1" o-- "1" Instrumento : instrumento
+    Main "*" --> "1" Orquestra : <<create>>
+```
 
 **Explicação do Diagrama:**
 
