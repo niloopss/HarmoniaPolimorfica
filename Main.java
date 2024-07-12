@@ -1,7 +1,18 @@
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * Classe principal que executa o programa Harmonia Polimórfica.
+ * Permite ao usuário interagir com uma orquestra virtual, tocando instrumentos e criando partituras.
+ *
+ * @author Nivea Lins
+ */
 public class Main {
+    /**
+     * Método principal que inicia a execução do programa.
+     *
+     * @param args Argumentos de linha de comando (não utilizados neste programa).
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Orquestra orquestra = new Orquestra();
@@ -26,7 +37,7 @@ public class Main {
             System.out.print("Escolha uma opçãao: ");
 
             escolha = scanner.nextInt();
-            scanner.nextLine(); // Limpar o buffer do scanner
+            scanner.nextLine();
 
             if (escolha > 0 && escolha <= orquestra.getInstrumentos().size()) {
                 Instrumento instrumento = orquestra.getInstrumentos().get(escolha - 1);

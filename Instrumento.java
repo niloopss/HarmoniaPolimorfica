@@ -1,4 +1,21 @@
+/**
+ * Interface que representa um instrumento musical genérico.
+ *
+ * @author Nivea Lins
+ */
 interface Instrumento {
-    void play(String nota);  // Método para tocar uma nota (se aplicável)
-    String toString();       // Retorna uma descrição do instrumento
+
+    /**
+     * Toca uma nota musical no instrumento.
+     *
+     * @param nota A nota musical a ser tocada. Pode ser nula para instrumentos de percussão.
+     */
+    void play(String nota);
+
+    /**
+     * Retorna uma representação em string do instrumento.
+     *
+     * @return O nome do instrumento.
+     */
+    String toString();
 }
